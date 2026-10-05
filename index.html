@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMON Panel Sance 2.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,Arial;background:linear-gradient(135deg,#07111f,#162b45);color:#fff;display:grid;place-items:center;padding:20px}
+.card{width:min(440px,100%);padding:28px;border-radius:24px;background:rgba(15,23,42,.94);box-shadow:0 20px 60px #0008;text-align:center;border:1px solid #ffffff18}
+.logo{width:76px;height:76px;margin:auto auto 15px;border-radius:20px;display:grid;place-items:center;font-size:30px;font-weight:900;background:linear-gradient(135deg,#22c55e,#06b6d4)}
+h1{font-size:24px;margin:0 0 8px}.sub{color:#cbd5e1;line-height:1.5}.steps{display:flex;gap:7px;margin:22px 0}.step{height:6px;flex:1;border-radius:99px;background:#334155}.step.on{background:#22c55e}
+button,a{width:100%;border:0;border-radius:14px;padding:14px 16px;font-size:16px;font-weight:800;display:block;text-decoration:none;cursor:pointer}.primary{background:#22c55e;color:#052e16}.dark{background:#334155;color:white;margin-top:10px}
+input{width:100%;padding:14px;border-radius:14px;border:1px solid #475569;background:#0b1220;color:white;font-size:16px;margin:8px 0 12px}.hidden{display:none}.msg{min-height:25px;margin-top:12px;color:#cbd5e1}.small{font-size:12px;color:#94a3b8;margin-top:18px}
+</style>
+</head>
+<body><main class="card">
+<div class="logo">E</div><h1>EMON Panel Sance 2.0</h1><p class="sub">Access পেতে ধাপগুলো সম্পন্ন করুন</p>
+<div class="steps"><i class="step on"></i><i class="step"></i><i class="step"></i><i class="step"></i></div>
+
+<section id="s1"><h2>TikTok</h2><p class="sub">প্রথমে TikTok প্রোফাইলটি খুলুন।</p>
+<a class="primary" href="https://www.tiktok.com/@ffidsaler1587?_r=1&_t=ZS-9AIGCybYCTU" target="_blank" rel="noopener">TikTok খুলুন</a>
+<button class="dark" onclick="go(2)">পরবর্তী</button></section>
+
+<section id="s2" class="hidden"><h2>Facebook</h2><p class="sub">এবার Facebook লিংকটি খুলুন।</p>
+<a class="primary" href="https://www.facebook.com/share/1DUGSx2vWA/" target="_blank" rel="noopener">Facebook খুলুন</a>
+<button class="dark" onclick="go(3)">পরবর্তী</button></section>
+
+<section id="s3" class="hidden"><h2>YouTube</h2><p class="sub">এবার YouTube চ্যানেলটি খুলুন।</p>
+<a class="primary" href="https://youtube.com/@toufikvai2010?si=hIyBQSC-7HnOUDnH" target="_blank" rel="noopener">YouTube খুলুন</a>
+<button class="dark" onclick="go(4)">Password Login</button></section>
+
+<section id="s4" class="hidden"><h2>🔐 Password Login</h2>
+<p class="sub">তোমার দেওয়া Password লিখুন। একটি Password সফলভাবে ব্যবহার হলে সেটি আর কাজ করবে না।</p>
+<input id="pw" type="password" autocomplete="off" placeholder="Password লিখুন">
+<button class="primary" onclick="login()">Login</button><div id="msg" class="msg"></div>
+<p class="small">Password-এর তালিকা এখানে প্রকাশ করা হয় না।</p></section>
+
+<section id="s5" class="hidden"><h2>✅ Access Granted</h2><p class="sub">Password সফলভাবে যাচাই হয়েছে। এখন APK ডাউনলোড করতে পারবেন।</p>
+<a class="primary" href="./EMON%20Panel%20Sance%202.0.apk" download>⬇️ APK Download</a>
+<p class="small">EMON Panel Sance 2.0</p></section>
+</main>
+<script>
+const API_URL="PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+function go(n){for(let i=1;i<=5;i++)document.getElementById("s"+i).classList.toggle("hidden",i!==n);
+document.querySelectorAll(".step").forEach((x,i)=>x.classList.toggle("on",i<n));}
+async function login(){const pw=document.getElementById("pw").value.trim(),m=document.getElementById("msg");
+if(!pw){m.textContent="Password লিখুন।";return}
+if(API_URL.includes("PASTE_")){m.textContent="Admin: Apps Script URL এখনো বসানো হয়নি।";return}
+m.textContent="Password যাচাই হচ্ছে...";
+try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({password:pw})});
+const d=await r.json(); if(d.ok) go(5); else m.textContent="❌ "+(d.message||"Password গ্রহণ করা হয়নি।");
+}catch(e){m.textContent="❌ Server-এর সাথে যোগাযোগ করা যাচ্ছে না।";}}
+</script></body></html>
